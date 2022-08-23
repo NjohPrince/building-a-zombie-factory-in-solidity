@@ -1,0 +1,11 @@
+## Module Two
+
+In Module One, we created a function that takes a name, uses it to generate a random zombie, and adds that zombie to our app's zombie database on the blockchain.
+
+In Module Two, we're going to make our app more game-like: We're going to make it multi-player, and we'll also be adding a more fun way to create zombies instead of just generating them randomly.
+
+How will we create new zombies? By having our zombies "feed" on other lifeforms!
+
+## Zombie Feeding
+
+When a zombie feeds, it infects the host with a virus. The virus then turns the host into a new zombie that joins your army. The new zombie's DNA will be calculated from the previous zombie's DNA and the host's DNA.
