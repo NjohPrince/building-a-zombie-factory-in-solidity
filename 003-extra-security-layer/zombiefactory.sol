@@ -23,6 +23,11 @@ contract ZombieFactory is Ownable {
     struct Zombie {
         string name;
         uint256 dna;
+        // level of zombie
+        // zombies that win more battles will get to level up
+        uint32 level;
+        // amount of time the zombie has to wait before it feed's again
+        uint32 readyTime;
     }
 
     // an array of zombies made from or having the Zombie structure
