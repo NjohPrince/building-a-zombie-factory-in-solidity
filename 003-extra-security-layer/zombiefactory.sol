@@ -19,6 +19,9 @@ contract ZombieFactory is Ownable {
     // will be used to convert our random number generated to 16 digits
     uint256 dnaModulus = 10**dnaDigits;
 
+    // cool down time for the zombies
+    uint32 cooldownTime = 1 days;
+
     // a zombie structure
     struct Zombie {
         string name;
@@ -41,7 +44,9 @@ contract ZombieFactory is Ownable {
 
     // internal function so that it can be accessed in derived functions
     function _createZombie(string memory _name, uint256 _dna) internal {
-        zombies.push(Zombie(_name, _dna));
+        zombies.push(
+            Zombie(_name, _dna, 1, uint32(block.timestamp + cooldownTime))
+        );
         uint256 id = zombies.length - 1;
 
         // assign zombie to an owner

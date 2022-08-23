@@ -44,6 +44,16 @@ contract ZombieFeeding is ZombieFactory {
         kittyContract = KittyInterface(_address);
     }
 
+    // trigger cooldown time of a zombie --making the game more interesting
+    function _triggerCooldown(Zombie storage _zombie) internal {
+        _zombie.readyTime = uint32(block.timestamp + cooldownTime);
+    }
+
+    // check if the zombie is ready
+    function _isReady(Zombie storage _zombie) internal view returns (bool) {
+        return (_zombie.readyTime <= block.timestamp);
+    }
+
     function feedAndMultiply(
         uint256 _zombieId,
         uint256 _targetDna,
@@ -54,6 +64,10 @@ contract ZombieFeeding is ZombieFactory {
 
         // get that zombie from our storage
         Zombie storage myZombie = zombies[_zombieId];
+
+        // check if the zombie is ready to be fed
+        // the user will be able to run this only when the zombie is ready
+        _isReady(myZombie);
 
         // make sure we have 16 digits for the targeDna
         _targetDna = _targetDna % dnaModulus;
@@ -73,6 +87,9 @@ contract ZombieFeeding is ZombieFactory {
         // default zombies name to NoName initially
         // we will fix this later on
         _createZombie("NoName", newDna);
+
+        // trigger cool down
+        _triggerCooldown(myZombie);
     }
 
     // function to feed on kitty
