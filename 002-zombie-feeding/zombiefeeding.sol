@@ -37,8 +37,13 @@ contract ZombieFeeding is ZombieFactory {
         uint256 _targetDna,
         string memory _species
     ) public {
+        // make sure only the owner feeds his/her zombie
         require(msg.sender == zombieToOwner[_zombieId]);
+
+        // get that zombie from our storage
         Zombie storage myZombie = zombies[_zombieId];
+
+        // make sure we have 16 digits for the targeDna
         _targetDna = _targetDna % dnaModulus;
 
         // zombie's new DNA is gotten from the average
@@ -52,6 +57,9 @@ contract ZombieFeeding is ZombieFactory {
         ) {
             newDna = newDna - (newDna % 100) + 99;
         }
+
+        // default zombies name to NoName initially
+        // we will fix this later on
         _createZombie("NoName", newDna);
     }
 

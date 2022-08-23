@@ -32,6 +32,7 @@ contract ZombieFactory {
     // keeps track of how many zombies an owner has
     mapping(address => uint256) ownerZombieCount;
 
+    // internal function so that it can be accessed in derived functions
     function _createZombie(string memory _name, uint256 _dna) internal {
         zombies.push(Zombie(_name, _dna));
         uint256 id = zombies.length - 1;
