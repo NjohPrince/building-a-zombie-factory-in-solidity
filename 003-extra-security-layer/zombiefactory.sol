@@ -2,12 +2,14 @@
 
 pragma solidity >=0.7.0 <0.9.0;
 
+import "./ownable.sol";
+
 /**
  * @title Creating a Zombie Factory
  * @notice In this section we will create our zombie factory
  */
 
-contract ZombieFactory {
+contract ZombieFactory is Ownable {
     // event to be emmitted when a zombie has been created
     event NewZombie(uint256 zombieId, string name, uint256 dna);
 
