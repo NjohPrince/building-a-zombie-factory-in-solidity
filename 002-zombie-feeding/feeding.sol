@@ -35,6 +35,13 @@ contract ZombieFactory {
     function _createZombie(string memory _name, uint256 _dna) private {
         zombies.push(Zombie(_name, _dna));
         uint256 id = zombies.length - 1;
+
+        // assign zombie to an owner
+        zombieToOwner[id] = msg.sender;
+
+        // imcrement owner's zombie
+        ownerZombieCount[msg.sender]++;
+
         // and fire it here
         emit NewZombie(id, _name, _dna);
     }
@@ -53,6 +60,10 @@ contract ZombieFactory {
     // this function helps us create a random zombie by calling or
     // making use of the function defined above
     function createRandomZombie(string memory _name) public {
+        // limit every user to one zombie at first
+        require(ownerZombieCount[msg.sender] == 0);
+
+        // random dna generation
         uint256 randDna = _generateRandomDna(_name);
         _createZombie(_name, randDna);
     }
