@@ -36,6 +36,10 @@ contract ZombieAttack is ZombieHelper {
             // feed on the enemies zombie and multiply winners
             // zombies troops
             feedAndMultiply(_zombieId, enemyZombie.dna, "zombie");
+        } else {
+            myZombie.lossCount++;
+            enemyZombie.winCount++;
+            _triggerCooldown(myZombie);
         }
     }
 }
