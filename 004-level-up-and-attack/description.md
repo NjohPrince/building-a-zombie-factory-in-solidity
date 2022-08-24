@@ -3,4 +3,6 @@
 What this module entails
 
 - Payment features to level up zombies
-- Zombies battle
+- Battle among zombies
+- Tracking loss count
+- Leveling up zombies

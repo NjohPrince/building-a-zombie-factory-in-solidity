@@ -5,7 +5,7 @@ pragma solidity >=0.7.0 <0.9.0;
 import "./zombiehelper.sol";
 
 /**
- * @title Zombie Attack COnfigurations
+ * @title Zombie Attack Configurations
  */
 
 contract ZombieAttack is ZombieHelper {
