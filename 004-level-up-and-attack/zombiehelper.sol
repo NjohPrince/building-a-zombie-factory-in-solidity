@@ -19,6 +19,23 @@ contract ZombieHelper is ZombieFeeding {
         _;
     }
 
+    // function for the owner of the contract to withdraw from the contract
+    // address(this).balance returns the amount of ethers paid to the contract's
+    // address and will stay there unless we make a function or a way of
+    // withdrawal
+    function withdraw() external onlyOwner {
+        address payable _owner = address(uint160(owner()));
+        _owner.transfer(address(this).balance);
+    }
+
+    // allow the owner to set the level up fee
+    // as there is changes in the proce rate of
+    // an ether and might be too expensive in
+    // the future
+    function setLevelUpFee(uint256 _fee) external onlyOwner {
+        levelUpFee = _fee;
+    }
+
     // function to level up zombies
     function levelUp(uint256 _zombieId) external payable {
         require(msg.value == levelUpFee);
