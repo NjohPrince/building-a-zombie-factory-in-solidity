@@ -31,6 +31,8 @@ contract ZombieFactory is Ownable {
         uint32 level;
         // amount of time the zombie has to wait before it feed's again
         uint32 readyTime;
+        uint16 winCount;
+        uint16 lossCount;
     }
 
     // an array of zombies made from or having the Zombie structure
@@ -45,7 +47,7 @@ contract ZombieFactory is Ownable {
     // internal function so that it can be accessed in derived functions
     function _createZombie(string memory _name, uint256 _dna) internal {
         zombies.push(
-            Zombie(_name, _dna, 1, uint32(block.timestamp + cooldownTime))
+            Zombie(_name, _dna, 1, uint32(block.timestamp + cooldownTime), 0, 0)
         );
         uint256 id = zombies.length - 1;
 
